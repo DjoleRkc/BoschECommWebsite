@@ -27,6 +27,14 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    public Page<Product> getProductsWithFilters(String name, Pageable pageable) {
+        if (name != null && !name.trim().isEmpty()) {
+            return productRepository.findByName(name, pageable);
+        } else {
+            return productRepository.findAll(pageable);
+        }
+    }
+
 
 
 

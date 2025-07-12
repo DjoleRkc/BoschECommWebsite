@@ -35,7 +35,7 @@ public class ProductController {
             @Parameter(description = "Number of items per page") @RequestParam(defaultValue = "10") int size,
             @Parameter(description = "Sort by field") @RequestParam(defaultValue = "name") String sortBy,
             @Parameter(description = "Sort direction (asc/desc)") @RequestParam(defaultValue = "asc") String sortDir,
-            @Parameter(description = "Search by product name") @RequestParam(required = false) String name
+            @Parameter(description = "Search by product name") @RequestParam(required = false) String name)
              {
 
         try {
@@ -44,7 +44,7 @@ public class ProductController {
 
             Pageable pageable = PageRequest.of(page, size, sort);
             Page<Product> products = productService.getProductsWithFilters(
-                    name, category, minPrice, maxPrice, pageable);
+                    name, pageable);
 
             return ResponseEntity.ok(products);
         } catch (Exception e) {
